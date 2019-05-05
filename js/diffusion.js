@@ -2,17 +2,14 @@
     "use strict";
 
     imageproc.diffusion = function(inputData, outputData){
-        let pr = true;
+        
         function find_closest_palette_color(oldRGB) {
-            // console.log($("#quant-number").val())
-            let quant_number = $("#quant-number").val()-1
-            
+            let quant_number = $("#quant-number").val()-1            
             let pixel = {}
             pixel.r = parseInt(Math.round(quant_number*oldRGB.r/255) * (255/quant_number))
             pixel.g = parseInt(Math.round(quant_number*oldRGB.g/255) * (255/quant_number))
             pixel.b = parseInt(Math.round(quant_number*oldRGB.b/255) * (255/quant_number))
-            if(pr) {console.log(pixel); pr = false;}
-            // console.log(pixel)
+            
             return pixel
         }
 
