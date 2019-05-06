@@ -444,6 +444,7 @@
     <script src="js/main.js"></script>
 
     <script src="js/diffusion.js"></script>
+    <script src="js/poster_diffusion.js"></script>
     <script>
     /*
      * The image processing operations are set up for the different layers.
@@ -482,8 +483,8 @@
 
             case "error-posterization":
 
-                var medianLayer1 = imageproc.createBuffer(outputImage);
-                imageproc.diffusion(inputImage, baseLayer1, 
+                // var medianLayer1 = imageproc.createBuffer(outputImage);
+                imageproc.poster_diffusion(inputImage, baseLayer1, 
                                         $("#error-posterization-red-bits").val(),
                                         $("#error-posterization-green-bits").val(),
                                         $("#error-posterization-blue-bits").val());
@@ -493,7 +494,7 @@
                 //                         $("#error-posterization-green-bits").val(),
                 //                         $("#error-posterization-blue-bits").val());
                 // imageproc.diffusion(medianLayer1, baseLayer1)
-                
+
                 break;
 
             /* Apply threshold */
