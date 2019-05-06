@@ -1,15 +1,29 @@
 (function(imageproc) {
     "use strict";
 
-    imageproc.diffusion = function(inputData, outputData){
+    imageproc.diffusion = function(inputData, outputData, redBits=null, greenBits=null, blueBits=null){
+        function makeBitMask(bits) {
+            var mask = 0;
+            for (var i = 0; i < bits; i++) {
+                mask >>= 1;
+                mask |= 128;
+            }
+            return mask;
+        }
         
         function find_closest_palette_color(oldRGB) {
             let quant_number = $("#quant-number").val()-1   
             let pixel = {}
-            pixel.r = parseInt(Math.round(quant_number*oldRGB.r/255) * (255/quant_number))
-            pixel.g = parseInt(Math.round(quant_number*oldRGB.g/255) * (255/quant_number))
-            pixel.b = parseInt(Math.round(quant_number*oldRGB.b/255) * (255/quant_number))
-            
+            // pixel.r = parseInt(Math.round(quant_number*oldRGB.r/255) * (255/quant_number))
+            // pixel.g = parseInt(Math.round(quant_number*oldRGB.g/255) * (255/quant_number))
+            // pixel.b = parseInt(Math.round(quant_number*oldRGB.b/255) * (255/quant_number))
+            let redM=makeBitMask(redBits);
+            let greenM=makeBitMask(greenBits);
+            let blueM=makeBitMask(blueBits);
+            pixel.r = oldRGB.r & redM;
+            pixel.g = oldRGB.g & greenM;
+            pixel.b = oldRGB.b & blueM;
+
             return pixel
         }
 

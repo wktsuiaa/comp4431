@@ -483,13 +483,18 @@
             case "error-posterization":
 
                 var medianLayer1 = imageproc.createBuffer(outputImage);
-               
 
-                imageproc.posterization(inputImage,medianLayer1,
+                imageproc.diffusion(inputImage, baseLayer1, 
                                         $("#error-posterization-red-bits").val(),
                                         $("#error-posterization-green-bits").val(),
                                         $("#error-posterization-blue-bits").val());
-                 imageproc.diffusion(medianLayer1,baseLayer1 );
+
+                // imageproc.posterization(inputImage, medianLayer1,
+                //                         $("#error-posterization-red-bits").val(),
+                //                         $("#error-posterization-green-bits").val(),
+                //                         $("#error-posterization-blue-bits").val());
+                // imageproc.diffusion(medianLayer1, baseLayer1)
+                
                 break;
 
             /* Apply threshold */
