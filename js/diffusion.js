@@ -3,8 +3,9 @@
 
     imageproc.diffusion = function(inputData, outputData){
         let pr = true;
+        console.log("diffusion")
         function find_closest_palette_color(oldRGB) {
-            // console.log($("#quant-number").val())
+            //console.log($("#quant-number").val())
             let quant_number = $("#quant-number").val()-1
             
             let pixel = {}

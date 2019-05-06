@@ -41,6 +41,9 @@
         // Create the red, green and blue masks
         // A function makeBitMask() is already given
 
+
+        console.log("posterization")
+
         var redM=makeBitMask(redBits);
         var greenM=makeBitMask(greenBits);
         var blueM=makeBitMask(blueBits);

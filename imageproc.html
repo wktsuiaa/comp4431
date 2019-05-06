@@ -85,6 +85,7 @@
                             <li role="presentation" class="active"><a href="#no-op" role="tab" data-toggle="tab"><i>Do Nothing</i></a></li>
                             <li role="presentation"><a href="#grayscale" role="tab" data-toggle="tab">GrayScale</a></li>
                             <li role="presentation"><a href="#posterization" role="tab" data-toggle="tab">Posterization</a></li>
+                            <li role="presentation"><a href="#error-posterization" role="tab" data-toggle="tab">Error Posterization</a></li>
                             <li role="presentation"><a href="#threshold" role="tab" data-toggle="tab">Threshold</a></li>
                             <li role="presentation"><a href="#comic-color" role="tab" data-toggle="tab">Comic Colour</a></li>
                         </ul>
@@ -176,6 +177,51 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <input class="form-control-range" id="posterization-blue-bits" type="range" value="2" min="1" max="8" step="1"
+                                             onchange="$(this).parent().next().html(parseInt($(this).val()))">
+                                        </div>
+                                        <span>2</span> bits
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+
+                                        <!-- Posterization -->
+                    <div role="tabpanel" class="tab-pane" id="error-posterization">
+                        <h5>Parameters</h5>
+                        <div class="row">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                <label for="error-posterization-red-bits">Red bits (to keep):</label>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input class="form-control-range" id="error-posterization-red-bits" type="range" value="2" min="1" max="8" step="1"
+                                             onchange="$(this).parent().next().html(parseInt($(this).val()))">
+
+                                        </div>
+                                        <span>2</span> bits
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                <label for="error-posterization-green-bits">Green bits (to keep):</label>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input class="form-control-range" id="error-posterization-green-bits" type="range" value="2" min="1" max="8" step="1"
+                                             onchange="$(this).parent().next().html(parseInt($(this).val()))">
+                                        </div>
+                                        <span>2</span> bits
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                <label for="error-posterization-blue-bits">Blue bits (to keep):</label>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input class="form-control-range" id="error-posterization-blue-bits" type="range" value="2" min="1" max="8" step="1"
                                              onchange="$(this).parent().next().html(parseInt($(this).val()))">
                                         </div>
                                         <span>2</span> bits
@@ -297,7 +343,7 @@
                                 <label for="quant-number">Quant Number:</label>
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <input class="form-control" id="quant-number" type="number" value="128" min="2" max="255" step="1">
+                                        <input class="form-control" id="quant-number" type="number" value="2" min="2" max="255" step="1">
                                     </div>
                                 </div>
                             </div>
@@ -425,11 +471,24 @@
                 break;
 
             /* Apply posterization */
+
             case "posterization":
                 imageproc.posterization(inputImage, baseLayer1,
                                         $("#posterization-red-bits").val(),
                                         $("#posterization-green-bits").val(),
                                         $("#posterization-blue-bits").val());
+                break;
+
+
+            case "error-posterization":
+
+                var medianLayer1 = imageproc.createBuffer(outputImage);
+                imageproc.diffusion(inputImage, medianLayer1);
+
+                imageproc.posterization(medianLayer1, baseLayer1,
+                                        $("#error-posterization-red-bits").val(),
+                                        $("#error-posterization-green-bits").val(),
+                                        $("#error-posterization-blue-bits").val());
                 break;
 
             /* Apply threshold */
