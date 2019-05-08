@@ -37,6 +37,7 @@
     	for (let y = 0; y < inputData.height; y++) {
             for (let x = 0; x < inputData.width; x++) {
                 let oldRGB = imageproc.getPixel(outputData, x, y);
+                let inputRGB = imageproc.getPixel(inputData, x, y);
                 let newRGB = find_closest_palette_color(oldRGB)
 
                 let i = ( x + y * outputData.width) * 4;
