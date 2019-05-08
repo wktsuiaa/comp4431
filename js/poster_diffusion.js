@@ -45,6 +45,12 @@
                 oldRGB.r = parseInt(inputRGB.r + errorRGB.r)
                 oldRGB.g = parseInt(inputRGB.g + errorRGB.g)
                 oldRGB.b = parseInt(inputRGB.b + errorRGB.b)
+                // oldRGB.r = inputRGB.r + errorRGB.r
+                // oldRGB.g = inputRGB.g + errorRGB.g
+                // oldRGB.b = inputRGB.b + errorRGB.b
+                if(oldRGB.r>255) {oldRGB.r = 255}
+                if(oldRGB.g>255) {oldRGB.g = 255}
+                if(oldRGB.b>255) {oldRGB.b = 255}
                 let newRGB = find_closest_palette_color(oldRGB)
 
                 let i = ( x + y * outputData.width) * 4;
@@ -88,8 +94,7 @@
             // if(y == inputData.height-1) debugger;
     	}
 
-        // console.log(errorImage-outputData)
-        // outputData = errorImage
+        // ============================= Copy error array into output to visually see the error image =======================//
         // for (let y = 0; y < errorImage.height; y++) {
         //     for (let x = 0; x < errorImage.width; x++) {
         //         let rgb = imageproc.getPixel(errorImage, x, y);
@@ -99,6 +104,7 @@
         //         outputData.data[i+2] = rgb.b;
         //     }
         // }
+        // ==================================================================================================================//
     }
 }(window.imageproc = window.imageproc || {}));
 
