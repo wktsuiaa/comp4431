@@ -51,6 +51,12 @@
                 if(oldRGB.r>255) {oldRGB.r = 255}
                 if(oldRGB.g>255) {oldRGB.g = 255}
                 if(oldRGB.b>255) {oldRGB.b = 255}
+
+                if(oldRGB.r<0) {oldRGB.r = 255}
+                if(oldRGB.g<0) {oldRGB.g = 255}
+                if(oldRGB.b<0) {oldRGB.b = 255}
+
+
                 let newRGB = find_closest_palette_color(oldRGB)
 
                 let i = ( x + y * outputData.width) * 4;
